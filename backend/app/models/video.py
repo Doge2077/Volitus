@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, Dict
+from typing import Optional, Dict, List
 
 class VideoUploadResponse(BaseModel):
     video_id: str
@@ -7,11 +7,11 @@ class VideoUploadResponse(BaseModel):
     message: str
 
 class VideoAnalysis(BaseModel):
-    characters: list[str]
+    characters: List[str]
     action: str
     emotion: str
     style: str
-    keywords: list[str]
+    keywords: List[str]
 
 class VideoAnalysisResponse(BaseModel):
     video_id: str

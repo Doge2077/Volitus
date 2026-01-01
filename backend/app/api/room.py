@@ -1,14 +1,13 @@
-import json
+from fastapi import APIRouter, HTTPException
+from app.models.room import RoomCreateRequest, RoomCreateResponse, RoomInfoResponse
+from app.config import get_settings
 import os
+import json
 import uuid
 from datetime import datetime
 
-from fastapi import APIRouter, HTTPException
-
-from ..models.room import RoomCreateResponse, RoomCreateRequest, RoomInfoResponse
-
 router = APIRouter()
-
+settings = get_settings()
 
 @router.post("/create", response_model=RoomCreateResponse)
 async def create_room(request: RoomCreateRequest):
@@ -41,14 +40,14 @@ async def create_room(request: RoomCreateRequest):
         json.dump(room_data, f, ensure_ascii=False, indent=2)
 
     # TODO: 生成 Agora Token
-    agora_token = "mock_token"
+    agora_token = ""
 
     # 获取起始剧情
     start_node = next(node for node in template["nodes"] if node["id"] == "start")
 
     return RoomCreateResponse(
         room_id=room_id,
-        agora_app_id="your_agora_app_id",  # 从配置读取
+        agora_app_id=settings.agora_app_id,
         agora_token=agora_token,
         agora_channel=room_id,
         plot={
@@ -56,7 +55,6 @@ async def create_room(request: RoomCreateRequest):
             "image_url": start_node["image"]
         }
     )
-
 
 @router.get("/{room_id}", response_model=RoomInfoResponse)
 async def get_room_info(room_id: str):
@@ -76,7 +74,6 @@ async def get_room_info(room_id: str):
         viewer_count=len(room_data["viewers"]),
         current_plot_node=room_data["current_node"]
     )
-
 
 @router.post("/{room_id}/next")
 async def room_next(room_id: str, current_node: str):

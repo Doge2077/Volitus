@@ -9,11 +9,8 @@ interface PlotDisplayProps {
 const PlotDisplay = ({ image, text, onNext }: PlotDisplayProps) => {
   return (
     <div className="plot-display">
-      <div className="plot-image-container">
-        <img src={image} alt="剧情" className="plot-image" />
-      </div>
-      <div className="plot-text">{text}</div>
-      <button className="next-button" onClick={onNext}>
+      <div className="plot-text">{text || '等待剧情...'}</div>
+      <button className="next-button" onClick={onNext} disabled={!text}>
         下一步 →
       </button>
     </div>
