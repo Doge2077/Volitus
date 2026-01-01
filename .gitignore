@@ -37,3 +37,6 @@ backend/data/rooms/*.json
 !backend/data/videos/.gitkeep
 !backend/data/images/.gitkeep
 !backend/data/rooms/.gitkeep
+/frontend-streamer/package-lock.json
+/frontend-viewer/package-lock.json
+/.claude/settings.local.json
