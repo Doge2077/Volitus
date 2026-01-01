@@ -50,7 +50,7 @@ class WebSocketService {
     this.roomId = roomId;
     this.role = role;
 
-    const wsUrl = import.meta.env.VITE_WS_URL || 'ws://localhost:8000/ws';
+    const wsUrl = import.meta.env.VITE_WS_URL || `ws://${window.location.hostname}:8031/ws`;
     const url = `${wsUrl}?room_id=${roomId}&role=${role}`;
 
     this.ws = new WebSocket(url);
