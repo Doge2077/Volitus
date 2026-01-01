@@ -6,9 +6,30 @@ import json
 import uuid
 from datetime import datetime
 from typing import List
+from agora_token_builder import RtcTokenBuilder
+import time
 
 router = APIRouter()
 settings = get_settings()
+
+def generate_agora_token(channel_name: str, uid: int = 0, role: int = 1):
+    """生成Agora RTC Token
+    role: 1=publisher(主播), 2=subscriber(观众)
+    """
+    app_id = settings.agora_app_id
+    app_certificate = settings.agora_app_certificate
+
+    if not app_certificate:
+        return ""
+
+    expiration_time_in_seconds = 3600 * 24  # 24小时
+    current_timestamp = int(time.time())
+    privilege_expired_ts = current_timestamp + expiration_time_in_seconds
+
+    token = RtcTokenBuilder.buildTokenWithUid(
+        app_id, app_certificate, channel_name, uid, role, privilege_expired_ts
+    )
+    return token
 
 @router.post("/create", response_model=RoomCreateResponse)
 async def create_room(request: RoomCreateRequest):
@@ -41,7 +62,7 @@ async def create_room(request: RoomCreateRequest):
         json.dump(room_data, f, ensure_ascii=False, indent=2)
 
     # TODO: 生成 Agora Token
-    agora_token = ""
+    agora_token = generate_agora_token(room_id, uid=0, role=1)  # role=1 主播
 
     # 获取起始剧情
     start_node = next(node for node in template["nodes"] if node["id"] == "start")
@@ -136,7 +157,7 @@ async def get_agora_config(room_id: str):
 
     # TODO: 生成观众端的 Agora Token
     # 目前返回空 token，如果 Agora 项目设置为测试模式则可以不需要 token
-    agora_token = ""
+    agora_token = generate_agora_token(room_id, uid=0, role=2)  # role=2 观众
 
     return AgoraConfigResponse(
         agora_app_id=settings.agora_app_id,
