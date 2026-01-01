@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "示例剧情游戏",
+    "version": "1.0.0",
+    "author": "Game Designer",
+    "description": "一个用于幻灯片剧情游戏的示例数据结构"
+  },
+  "chapters": [
+    {
+      "id": "chapter_1",
+      "background": {
+        "id": "bg_classroom_morning",
+        "image": "assets/backgrounds/classroom_morning.png"
+      },
+      "roles": [
+        {
+          "id": "role_hero",
+          "name": "主角",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 0,
+              "text": "这里是哪里？"
+            },
+            {
+              "time": 3000,
+              "text": "好像是学校的教室。"
+            }
+          ]
+        },
+        {
+          "id": "role_friend",
+          "name": "朋友",
+          "avatar": "assets/roles/friend.png",
+          "dialogues": [
+            {
+              "time": 1500,
+              "text": "你终于醒了。"
+            },
+            {
+              "time": 4500,
+              "text": "今天可是很重要的一天。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chapter_2",
+      "background": {
+        "id": "bg_street_evening",
+        "image": "assets/backgrounds/street_evening.png"
+      },
+      "roles": [
+        {
+          "id": "role_hero",
+          "name": "主角",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 1000,
+              "text": "天已经黑了。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
