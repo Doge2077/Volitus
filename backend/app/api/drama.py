@@ -362,13 +362,15 @@ async def insert_chapter(request: ChapterInsertRequest):
     )
 
 @router.post("/interaction/add")
-async def add_user_interaction(room_id: str, interaction: UserInteraction):
+async def add_user_interaction(request: dict):
     """添加用户互动数据"""
+    room_id = request.get("room_id")
+    interaction_data = request.get("interaction")
 
     if room_id not in user_interactions:
         user_interactions[room_id] = []
 
-    user_interactions[room_id].append(interaction)
+    user_interactions[room_id].append(UserInteraction(**interaction_data))
 
     # 检查是否达到5个互动
     count = len(user_interactions[room_id])

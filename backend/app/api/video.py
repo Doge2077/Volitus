@@ -3,15 +3,50 @@ import os
 import uuid
 from datetime import datetime
 
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks
 
 from ..models.video import VideoUploadResponse, VideoAnalysisResponse
+from ..services.dify_service import DifyService
+from ..config import get_settings
 
 router = APIRouter()
+settings = get_settings()
+dify_service = DifyService(settings.dify_api_key)
+
+
+async def process_video_task(video_id: str, file_path: str, room_id: str):
+    """后台任务：调用 Dify 处理视频"""
+    analysis_file = f"data/videos/{video_id}_analysis.json"
+
+    try:
+        result = await dify_service.process_video(file_path, room_id)
+
+        analysis_data = {
+            "video_id": video_id,
+            "room_id": room_id,
+            "status": "completed",
+            "result": result.get("data", {}),
+            "created_at": int(datetime.now().timestamp())
+        }
+    except Exception as e:
+        import traceback
+        error_detail = f"{type(e).__name__}: {str(e)}\n{traceback.format_exc()}"
+        print(f"Dify处理失败: {error_detail}")
+        analysis_data = {
+            "video_id": video_id,
+            "room_id": room_id,
+            "status": "failed",
+            "error": error_detail,
+            "created_at": int(datetime.now().timestamp())
+        }
+
+    with open(analysis_file, "w", encoding="utf-8") as f:
+        json.dump(analysis_data, f, ensure_ascii=False, indent=2)
 
 
 @router.post("/upload", response_model=VideoUploadResponse)
 async def upload_video(
+        background_tasks: BackgroundTasks,
         video: UploadFile = File(...),
         room_id: str = None
 ):
@@ -28,7 +63,7 @@ async def upload_video(
         content = await video.read()
         f.write(content)
 
-    # 创建分析任务（异步）
+    # 创建初始分析记录
     analysis_file = f"data/videos/{video_id}_analysis.json"
     analysis_data = {
         "video_id": video_id,
@@ -40,8 +75,8 @@ async def upload_video(
     with open(analysis_file, "w", encoding="utf-8") as f:
         json.dump(analysis_data, f, ensure_ascii=False, indent=2)
 
-    # TODO: 异步调用豆包 API 分析视频
-    # 这里先返回 processing 状态，实际应该启动后台任务
+    # 启动后台任务调用 Dify
+    background_tasks.add_task(process_video_task, video_id, file_path, room_id)
 
     return VideoUploadResponse(
         video_id=video_id,
