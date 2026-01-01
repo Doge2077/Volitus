@@ -6,6 +6,9 @@ class Settings(BaseSettings):
     doubao_api_key: str = ""
     doubao_api_url: str = "https://ark.cn-beijing.volces.com/api/v3"
 
+    # Dify API
+    dify_api_key: str = "app-QpB6IYdTlg2rstdG72ggN3FM"
+
     # 图片生成 API
     image_gen_api_key: str = ""
     image_gen_api_url: str = "https://api.openai.com/v1/images/generations"

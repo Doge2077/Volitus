@@ -13,7 +13,7 @@ import './App.css';
 
 function App() {
   const [started, setStarted] = useState(false);
-  const [useDramaGame, setUseDramaGame] = useState(true); // 使用剧本游戏
+  const [gameWindow, setGameWindow] = useState<Window | null>(null);
   const {
     roomId,
     currentNode,
@@ -33,6 +33,21 @@ function App() {
   const handleStart = () => {
     setStarted(true);
     setIsLive(true);
+  };
+
+  const openGameWindow = () => {
+    const width = 1280;
+    const height = 720;
+    const left = (window.screen.width - width) / 2;
+    const top = (window.screen.height - height) / 2;
+
+    const newWindow = window.open(
+      `/game?roomId=${roomId}`,
+      'DramaGame',
+      `width=${width},height=${height},left=${left},top=${top}`
+    );
+
+    setGameWindow(newWindow);
   };
 
   const handleNext = async () => {
@@ -65,32 +80,30 @@ function App() {
 
   return (
     <div className="app-container fullscreen">
-      {useDramaGame ? (
-        // 使用剧本游戏模式 - 游戏铺满全屏
-        <>
-          <DramaGame
-            roomId={roomId}
-            storyPath="../drama/story.json"
-            ws={getWebSocket()}
-          />
-          {/* 摄像头小窗浮在游戏上方 */}
-          <StreamPublisher />
-        </>
-      ) : (
-        // 使用原有的PlotDisplay模式
-        <>
-          <StreamPublisher />
-          <div className="overlay-panels">
-            <StatsPanel />
-            <VotePanel />
-            <PlotDisplay
-              image={currentNode?.image || ''}
-              text={currentNode?.text || ''}
-              onNext={handleNext}
-            />
-          </div>
-        </>
-      )}
+      <StreamPublisher />
+      <div className="overlay-panels">
+        <StatsPanel />
+        <VotePanel />
+        <button
+          style={{
+            position: 'fixed',
+            top: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            padding: '12px 24px',
+            fontSize: '16px',
+            backgroundColor: '#4CAF50',
+            color: 'white',
+            border: 'none',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            zIndex: 1000,
+          }}
+          onClick={openGameWindow}
+        >
+          🎮 打开游戏窗口
+        </button>
+      </div>
     </div>
   );
 }
