@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import LivePlayer from '../components/LivePlayer'
 import VoteModal from '../components/VoteModal'
 import VideoUpload from '../components/VideoUpload'
+import ChatWindow from '../components/ChatWindow'
 import { roomAPI } from '../services/api'
 import './RoomPage.css'
 
@@ -83,10 +84,7 @@ function RoomPage() {
         </div>
         <div className="side-panel">
           <VideoUpload roomId={roomId!} />
-          <div className="plot-info">
-            <h3>当前剧情</h3>
-            <p>等待主播开始...</p>
-          </div>
+          <ChatWindow roomId={roomId!} />
         </div>
       </div>
 

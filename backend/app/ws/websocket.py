@@ -57,6 +57,10 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str, role: str):
                 # 处理投票
                 await handle_vote(room_id, message["data"])
 
+            elif message["type"] == "chat:message":
+                # 处理聊天消息
+                await handle_chat_message(room_id, message["data"], role)
+
             elif message["type"] == "ping":
                 # 心跳
                 await websocket.send_text(json.dumps({"type": "pong"}))
@@ -79,3 +83,20 @@ async def handle_vote(room_id: str, vote_data: dict):
     # 3. 判断是否达到 2/3
     # 4. 广播投票进度
     pass
+
+async def handle_chat_message(room_id: str, chat_data: dict, sender_role: str):
+    """处理聊天消息"""
+    # 广播聊天消息到房间所有人
+    await manager.send_to_room(room_id, {
+        "type": "chat:message",
+        "data": {
+            "id": chat_data.get("id"),
+            "type": chat_data.get("type", "text"),
+            "content": chat_data.get("content"),
+            "sender": chat_data.get("sender"),
+            "sender_role": sender_role,
+            "timestamp": int(datetime.now().timestamp() * 1000),
+            "videoUrl": chat_data.get("videoUrl")
+        }
+    })
+
