@@ -1,1 +1,39 @@
-.idea
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+dist/
+*.log
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 环境变量
+.env
+
+# 数据文件
+backend/data/videos/*.mp4
+backend/data/videos/*.json
+backend/data/images/*.jpg
+backend/data/images/*.png
+backend/data/rooms/*.json
+
+# 保留目录结构
+!backend/data/plots/
+!backend/data/videos/.gitkeep
+!backend/data/images/.gitkeep
+!backend/data/rooms/.gitkeep

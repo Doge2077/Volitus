@@ -1,0 +1,90 @@
+.vote-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.vote-modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  min-width: 400px;
+  max-width: 500px;
+}
+
+.vote-modal h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.vote-timer {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.vote-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.vote-option {
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.vote-option:hover {
+  border-color: #667eea;
+  background: #f8f9ff;
+}
+
+.vote-option.selected {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+}
+
+.vote-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.vote-actions button {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.vote-actions button:first-child {
+  background: #667eea;
+  color: white;
+}
+
+.vote-actions button:first-child:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.vote-actions button.cancel {
+  background: #f0f0f0;
+  color: #666;
+}
