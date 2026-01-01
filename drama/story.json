@@ -1,0 +1,301 @@
+{
+  "meta": {
+    "title": "迷雾森林的秘密",
+    "version": "1.0.0",
+    "author": "Story Writer",
+    "description": "一个关于勇气与发现的冒险故事"
+  },
+  "chapters": [
+    {
+      "id": 1,
+      "background": {
+        "id": "bg_village_morning",
+        "image": "assets/backgrounds/village.png"
+      },
+      "roles": [
+        {
+          "id": "role_hero",
+          "name": "小林",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 0,
+              "text": "今天就是爷爷失踪的那一天..."
+            },
+            {
+              "time": 3000,
+              "text": "我一定要去迷雾森林找到他！"
+            }
+          ]
+        },
+        {
+          "id": "role_elder",
+          "name": "村长",
+          "avatar": "assets/roles/elder.png",
+          "dialogues": [
+            {
+              "time": 1500,
+              "text": "孩子，那片森林太危险了。"
+            },
+            {
+              "time": 4000,
+              "text": "不过如果你心意已决，请带上这个护身符。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "background": {
+        "id": "bg_forest_edge",
+        "image": "assets/backgrounds/forest1.png"
+      },
+      "roles": [
+        {
+          "id": "role_hero",
+          "name": "小林",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 0,
+              "text": "森林入口就在眼前..."
+            },
+            {
+              "time": 2500,
+              "text": "这里的雾气比我想象的还要浓。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "background": {
+        "id": "bg_forest_deep",
+        "image": "assets/backgrounds/forest2.png"
+      },
+      "roles": [
+        {
+          "id": "role_hero",
+          "name": "小林",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 0,
+              "text": "等等，这是什么？"
+            },
+            {
+              "time": 2000,
+              "text": "这块石头上的符号...和爷爷日记里画的一样！"
+            },
+            {
+              "time": 5000,
+              "text": "看来我是走对了方向。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "background": {
+        "id": "bg_forest_ruins",
+        "image": "assets/backgrounds/forest2.png"
+      },
+      "roles": [
+        {
+          "id": "role_spirit",
+          "name": "森林精灵",
+          "avatar": "assets/roles/spirit.png",
+          "dialogues": [
+            {
+              "time": 500,
+              "text": "又有陌生人闯入..."
+            },
+            {
+              "time": 2500,
+              "text": "你身上有那人的气味。"
+            }
+          ]
+        },
+        {
+          "id": "role_hero",
+          "name": "小林",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 1000,
+              "text": "你是说我的爷爷吗？他在哪里？"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "background": {
+        "id": "bg_forest_ruins",
+        "image": "assets/backgrounds/forest2.png"
+      },
+      "roles": [
+        {
+          "id": "role_spirit",
+          "name": "森林精灵",
+          "avatar": "assets/roles/spirit.png",
+          "dialogues": [
+            {
+              "time": 0,
+              "text": "他被困在古树的深处。"
+            },
+            {
+              "time": 3000,
+              "text": "只有解开三个谜题，才能释放他。"
+            }
+          ]
+        },
+        {
+          "id": "role_hero",
+          "name": "小林",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 1500,
+              "text": "告诉我，我该怎么做！"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "background": {
+        "id": "bg_forest_puzzle",
+        "image": "assets/backgrounds/forest1.png"
+      },
+      "roles": [
+        {
+          "id": "role_hero",
+          "name": "小林",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 0,
+              "text": "第一个谜题...勇气之镜。"
+            },
+            {
+              "time": 3000,
+              "text": "我必须诚实地面对自己的恐惧。"
+            },
+            {
+              "time": 6000,
+              "text": "我终于明白了...真正的勇气是承认自己的软弱。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "background": {
+        "id": "bg_forest_puzzle2",
+        "image": "assets/backgrounds/forest1.png"
+      },
+      "roles": [
+        {
+          "id": "role_hero",
+          "name": "小林",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 0,
+              "text": "第二个谜题...回忆之桥。"
+            },
+            {
+              "time": 2500,
+              "text": "爷爷总是说，最珍贵的回忆不是获得，而是付出。"
+            },
+            {
+              "time": 5500,
+              "text": "我明白了，这是要我学会珍惜。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "background": {
+        "id": "bg_forest_final",
+        "image": "assets/backgrounds/forest2.png"
+      },
+      "roles": [
+        {
+          "id": "role_hero",
+          "name": "小林",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 0,
+              "text": "最后一个谜题...选择之门。"
+            },
+            {
+              "time": 3000,
+              "text": "一扇门通往爷爷，一扇门通往离开。"
+            },
+            {
+              "time": 6000,
+              "text": "不管选择哪一扇门，我都不会后悔。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "background": {
+        "id": "bg_forest_clearing",
+        "image": "assets/backgrounds/forest1.png"
+      },
+      "roles": [
+        {
+          "id": "role_grandpa",
+          "name": "爷爷",
+          "avatar": "assets/roles/elder.png",
+          "dialogues": [
+            {
+              "time": 500,
+              "text": "小林...你真的来了。"
+            }
+          ]
+        },
+        {
+          "id": "role_hero",
+          "name": "小林",
+          "avatar": "assets/roles/hero.png",
+          "dialogues": [
+            {
+              "time": 1500,
+              "text": "爷爷！我终于找到你了！"
+            }
+          ]
+        },
+        {
+          "id": "role_grandpa",
+          "name": "爷爷",
+          "avatar": "assets/roles/elder.png",
+          "dialogues": [
+            {
+              "time": 3000,
+              "text": "你已经通过了所有考验，也长大了许多。"
+            },
+            {
+              "time": 6000,
+              "text": "走吧，一起回家。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

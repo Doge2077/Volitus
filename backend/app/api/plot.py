@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException
-from app.models.plot import PlotTemplate, PlotGenerateRequest, PlotGenerateResponse
 import os
 import json
+
+from ..models.plot import PlotGenerateResponse, PlotGenerateRequest
 
 router = APIRouter()
 

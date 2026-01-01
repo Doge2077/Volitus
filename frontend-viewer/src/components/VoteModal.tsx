@@ -15,7 +15,7 @@ interface VoteModalProps {
 
 const VoteModal = ({ options, onVote, onClose }: VoteModalProps) => {
   const [selected, setSelected] = useState<string | null>(null)
-  const [timeLeft, setTimeLeft] = useState(15)
+  const [timeLeft] = useState(15)  // TODO: 实现倒计时功能
 
   const handleVote = () => {
     if (selected) {

@@ -1,53 +1,98 @@
-import { useState } from 'react'
-import StreamPublisher from './components/StreamPublisher'
-import PlotDisplay from './components/PlotDisplay'
-import './App.css'
+import { useState } from 'react';
+import SetupScreen from './components/SetupScreen';
+import StreamPublisher from './components/StreamPublisher';
+import PlotDisplay from './components/PlotDisplay';
+import VotePanel from './components/VotePanel';
+import StatsPanel from './components/StatsPanel';
+import DramaGame from './components/DramaGame';
+import { useStreamStore } from './store';
+import { useWebSocket } from './hooks/useWebSocket';
+import { roomAPI } from './services/api';
+import { wsService } from './services/websocket';
+import './App.css';
 
 function App() {
-  const [roomId, setRoomId] = useState('')
-  const [started, setStarted] = useState(false)
-  const [currentPlot, setCurrentPlot] = useState({
-    image: '/images/forest_start.jpg',
-    text: '选择剧情模板开始直播'
-  })
+  const [started, setStarted] = useState(false);
+  const [useDramaGame, setUseDramaGame] = useState(true); // 使用剧本游戏
+  const {
+    roomId,
+    currentNode,
+    setCurrentNode,
+    addToHistory,
+    setIsLive,
+  } = useStreamStore();
 
-  const handleStartStream = async () => {
-    // TODO: 调用后端创建房间
-    const mockRoomId = 'room_' + Date.now()
-    setRoomId(mockRoomId)
-    setStarted(true)
-  }
+  // 连接 WebSocket
+  useWebSocket(roomId, started);
+
+  // 获取WebSocket实例
+  const getWebSocket = () => {
+    return wsService.getWebSocket();
+  };
+
+  const handleStart = () => {
+    setStarted(true);
+    setIsLive(true);
+  };
+
+  const handleNext = async () => {
+    if (!currentNode) return;
+
+    try {
+      const response = await roomAPI.nextStep(roomId, {
+        current_node: currentNode.id,
+      });
+
+      const { next_node, type, vote_id } = response.data;
+
+      if (type === 'vote_point') {
+        // 投票点，等待投票结果
+        console.log('Reached vote point:', vote_id);
+      } else {
+        // 普通节点，继续前进
+        addToHistory(currentNode);
+        // 这里应该从后端获取下一个节点的详细信息
+        // 暂时保持当前节点
+      }
+    } catch (error) {
+      console.error('Failed to proceed to next step:', error);
+    }
+  };
 
   if (!started) {
-    return (
-      <div className="setup-container">
-        <h1>Volitus 主播端</h1>
-        <div className="setup-form">
-          <input type="text" placeholder="主播名称" />
-          <select>
-            <option>选择剧情模板</option>
-            <option value="template_001">神秘森林冒险</option>
-          </select>
-          <button onClick={handleStartStream}>开始直播</button>
-        </div>
-      </div>
-    )
+    return <SetupScreen onStart={handleStart} />;
   }
 
   return (
-    <div className="streamer-container">
-      <div className="stream-section">
-        <StreamPublisher roomId={roomId} />
-      </div>
-      <div className="plot-section">
-        <PlotDisplay
-          image={currentPlot.image}
-          text={currentPlot.text}
-          onNext={() => console.log('下一步')}
-        />
-      </div>
+    <div className="app-container fullscreen">
+      {useDramaGame ? (
+        // 使用剧本游戏模式 - 游戏铺满全屏
+        <>
+          <DramaGame
+            roomId={roomId}
+            storyPath="../drama/story.json"
+            ws={getWebSocket()}
+          />
+          {/* 摄像头小窗浮在游戏上方 */}
+          <StreamPublisher />
+        </>
+      ) : (
+        // 使用原有的PlotDisplay模式
+        <>
+          <StreamPublisher />
+          <div className="overlay-panels">
+            <StatsPanel />
+            <VotePanel />
+            <PlotDisplay
+              image={currentNode?.image || ''}
+              text={currentNode?.text || ''}
+              onNext={handleNext}
+            />
+          </div>
+        </>
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

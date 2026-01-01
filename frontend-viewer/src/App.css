@@ -1,74 +1,14 @@
-.join-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.join-container h1 {
-  color: white;
-  margin-bottom: 2rem;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.join-form {
-  display: flex;
-  gap: 1rem;
-}
-
-.join-form input {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  min-width: 300px;
-}
-
-.join-form button {
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  background: white;
-  color: #667eea;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.join-form button:hover {
-  background: #f0f0f0;
-}
-
-.viewer-container {
-  display: flex;
-  height: 100vh;
-  background: #1a1a1a;
-}
-
-.main-content {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.side-panel {
-  width: 350px;
-  background: #2a2a2a;
-  padding: 1rem;
-  overflow-y: auto;
-}
-
-.plot-info {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #3a3a3a;
-  border-radius: 8px;
-  color: white;
-}
-
-.plot-info h3 {
-  margin-top: 0;
-}

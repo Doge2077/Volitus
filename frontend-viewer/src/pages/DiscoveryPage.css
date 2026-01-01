@@ -1,0 +1,156 @@
+.discovery-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+}
+
+.discovery-header {
+  text-align: center;
+  color: white;
+  margin-bottom: 3rem;
+}
+
+.discovery-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.discovery-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.loading,
+.error,
+.empty-state {
+  text-align: center;
+  color: white;
+  padding: 3rem;
+  font-size: 1.2rem;
+}
+
+.error button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: white;
+  color: #667eea;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.error button:hover {
+  transform: scale(1.05);
+}
+
+.empty-state .hint {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.room-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.room-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.room-thumbnail {
+  position: relative;
+  height: 180px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.live-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff4757;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.viewer-count {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.viewer-count .icon {
+  font-size: 1rem;
+}
+
+.room-info {
+  padding: 1rem;
+}
+
+.streamer-name {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem 0;
+  color: #2d3436;
+  font-weight: 600;
+}
+
+.room-id {
+  font-size: 0.85rem;
+  color: #636e72;
+  margin: 0.3rem 0;
+}
+
+.created-time {
+  font-size: 0.8rem;
+  color: #b2bec3;
+  margin: 0.3rem 0 0 0;
+}
+
+.refresh-hint {
+  text-align: center;
+  color: white;
+  margin-top: 2rem;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}

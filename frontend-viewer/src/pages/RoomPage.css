@@ -1,0 +1,152 @@
+.room-page {
+  min-height: 100vh;
+  background: #1a1a2e;
+}
+
+.room-loading,
+.room-error {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.room-loading p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.room-error h2 {
+  margin-bottom: 1rem;
+}
+
+.room-error p {
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.room-error button {
+  padding: 0.75rem 2rem;
+  background: white;
+  color: #667eea;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.room-error button:hover {
+  transform: scale(1.05);
+}
+
+.room-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: #16213e;
+  border-bottom: 1px solid #2d3748;
+  color: white;
+}
+
+.back-button {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.room-title {
+  flex: 1;
+  text-align: center;
+}
+
+.room-title h2 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.3rem;
+}
+
+.room-id-badge {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.room-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.viewer-count {
+  padding: 0.4rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.viewer-container {
+  display: flex;
+  height: calc(100vh - 100px);  /* 留出更多空间给header */
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.main-content {
+  flex: 1;
+  background: #16213e;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.side-panel {
+  width: 380px;  /* 增加宽度以更好地显示聊天 */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+/* ChatWindow占据剩余空间 */
+.side-panel > :last-child {
+  flex: 1;
+  min-height: 0;
+}
+
+
+@media (max-width: 1024px) {
+  .viewer-container {
+    flex-direction: column;
+  }
+
+  .side-panel {
+    width: 100%;
+  }
+}

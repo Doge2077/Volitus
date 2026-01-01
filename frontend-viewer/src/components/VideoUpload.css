@@ -3,6 +3,8 @@
   background: #3a3a3a;
   border-radius: 8px;
   color: white;
+  flex-shrink: 0;  /* 防止压缩 */
+  max-height: 200px;  /* 限制最大高度 */
 }
 
 .video-upload h3 {
