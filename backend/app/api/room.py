@@ -1,11 +1,14 @@
-from fastapi import APIRouter, HTTPException
-from app.models.room import RoomCreateRequest, RoomCreateResponse, RoomInfoResponse
-import os
 import json
+import os
 import uuid
 from datetime import datetime
 
+from fastapi import APIRouter, HTTPException
+
+from ..models.room import RoomCreateResponse, RoomCreateRequest, RoomInfoResponse
+
 router = APIRouter()
+
 
 @router.post("/create", response_model=RoomCreateResponse)
 async def create_room(request: RoomCreateRequest):
@@ -54,6 +57,7 @@ async def create_room(request: RoomCreateRequest):
         }
     )
 
+
 @router.get("/{room_id}", response_model=RoomInfoResponse)
 async def get_room_info(room_id: str):
     """获取房间信息"""
@@ -72,6 +76,7 @@ async def get_room_info(room_id: str):
         viewer_count=len(room_data["viewers"]),
         current_plot_node=room_data["current_node"]
     )
+
 
 @router.post("/{room_id}/next")
 async def room_next(room_id: str, current_node: str):

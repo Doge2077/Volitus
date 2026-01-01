@@ -1,17 +1,19 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException
-from app.models.video import VideoUploadResponse, VideoAnalysisResponse
-from app.services.ai_doubao import analyze_video
+import json
 import os
 import uuid
-import json
 from datetime import datetime
+
+from fastapi import APIRouter, UploadFile, File, HTTPException
+
+from ..models.video import VideoUploadResponse, VideoAnalysisResponse
 
 router = APIRouter()
 
+
 @router.post("/upload", response_model=VideoUploadResponse)
 async def upload_video(
-    video: UploadFile = File(...),
-    room_id: str = None
+        video: UploadFile = File(...),
+        room_id: str = None
 ):
     """上传视频并开始解析"""
 
@@ -46,6 +48,7 @@ async def upload_video(
         status="processing",
         message="视频上传成功，正在解析中"
     )
+
 
 @router.get("/analyze/{video_id}", response_model=VideoAnalysisResponse)
 async def get_video_analysis(video_id: str):
