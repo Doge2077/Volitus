@@ -1,0 +1,39 @@
+.video-upload {
+  padding: 1rem;
+  background: #3a3a3a;
+  border-radius: 8px;
+  color: white;
+}
+
+.video-upload h3 {
+  margin-top: 0;
+}
+
+.upload-hint {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 1rem;
+}
+
+.upload-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #667eea;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.upload-button:hover {
+  background: #5568d3;
+}
+
+.upload-message {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: #4a4a4a;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}

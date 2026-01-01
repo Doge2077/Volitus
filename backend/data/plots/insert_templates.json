@@ -1,0 +1,32 @@
+{
+  "npc_encounter": {
+    "type": "npc_encounter",
+    "image_prompt": "A {style} scene in a mysterious forest where a {character} suddenly appears and starts {action}, {emotion} atmosphere, cinematic lighting",
+    "text_template": "突然，{character}出现了！它开始{action}，场面十分{emotion}！"
+  },
+  "sudden_event": {
+    "type": "sudden_event",
+    "image_prompt": "A {style} scene in a forest showing {action} happening unexpectedly, {emotion} mood, dramatic moment",
+    "text_template": "意外发生了！{action}突然出现，让人感到{emotion}！"
+  },
+  "rule_change": {
+    "type": "rule_change",
+    "image_prompt": "A {style} mystical forest scene with mysterious rules changing, {emotion} atmosphere, magical effects",
+    "text_template": "森林的规则改变了！现在你必须{action}才能继续前进！"
+  },
+  "brave_forward": {
+    "type": "brave_forward",
+    "image_prompt": "A {style} heroic scene in forest where character bravely {action}, {emotion} atmosphere, epic moment",
+    "text_template": "你鼓起勇气{action}，展现出了{emotion}的一面！"
+  },
+  "seek_help": {
+    "type": "seek_help",
+    "image_prompt": "A {style} scene where {character} appears to help, {emotion} atmosphere, hopeful lighting",
+    "text_template": "{character}听到了你的呼唤，前来{action}帮助你！"
+  },
+  "wise_choice": {
+    "type": "wise_choice",
+    "image_prompt": "A {style} clever scene showing {action} with wisdom, {emotion} atmosphere, intelligent solution",
+    "text_template": "你运用智慧{action}，这个{emotion}的决定改变了局面！"
+  }
+}

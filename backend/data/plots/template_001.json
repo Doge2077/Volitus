@@ -1,0 +1,104 @@
+{
+  "id": "template_001",
+  "name": "神秘森林冒险",
+  "description": "一场充满未知的森林探险，观众的选择将决定你的命运",
+  "thumbnail": "/images/template_001_thumb.jpg",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "normal",
+      "image": "/images/forest_start.jpg",
+      "text": "你来到了一个神秘的森林入口，前方的道路被迷雾笼罩...",
+      "next": "node_001"
+    },
+    {
+      "id": "node_001",
+      "type": "normal",
+      "image": "/images/forest_path.jpg",
+      "text": "你沿着小路前进，周围的树木越来越密集",
+      "next": "node_002"
+    },
+    {
+      "id": "node_002",
+      "type": "vote_point",
+      "image": "/images/forest_crossroad.jpg",
+      "text": "前方出现了一个岔路口，观众们正在决定你的命运...",
+      "vote_config": {
+        "duration": 15,
+        "threshold": 0.67,
+        "options": [
+          {
+            "id": "A",
+            "label": "神秘访客",
+            "template": "npc_encounter",
+            "description": "一个神秘的角色将会出现"
+          },
+          {
+            "id": "B",
+            "label": "突发事件",
+            "template": "sudden_event",
+            "description": "意想不到的事情即将发生"
+          },
+          {
+            "id": "C",
+            "label": "规则变化",
+            "template": "rule_change",
+            "description": "游戏规则将会改变"
+          }
+        ]
+      },
+      "next": "node_003"
+    },
+    {
+      "id": "node_003",
+      "type": "normal",
+      "image": "/images/forest_deep.jpg",
+      "text": "你继续深入森林，前方传来了奇怪的声音...",
+      "next": "node_004"
+    },
+    {
+      "id": "node_004",
+      "type": "vote_point",
+      "image": "/images/forest_mystery.jpg",
+      "text": "又到了关键时刻，观众们再次掌握你的命运！",
+      "vote_config": {
+        "duration": 15,
+        "threshold": 0.67,
+        "options": [
+          {
+            "id": "A",
+            "label": "勇敢前进",
+            "template": "brave_forward",
+            "description": "直面未知的挑战"
+          },
+          {
+            "id": "B",
+            "label": "寻找帮助",
+            "template": "seek_help",
+            "description": "寻找可能的援助"
+          },
+          {
+            "id": "C",
+            "label": "智慧应对",
+            "template": "wise_choice",
+            "description": "用智慧解决问题"
+          }
+        ]
+      },
+      "next": "node_005"
+    },
+    {
+      "id": "node_005",
+      "type": "normal",
+      "image": "/images/forest_clearing.jpg",
+      "text": "你来到了一片空地，阳光透过树叶洒下...",
+      "next": "end"
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "image": "/images/forest_end.jpg",
+      "text": "冒险结束！感谢观众们的参与，你们的选择创造了独一无二的故事！"
+    }
+  ]
+}
