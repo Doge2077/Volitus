@@ -4,13 +4,16 @@ import StreamPublisher from './components/StreamPublisher';
 import PlotDisplay from './components/PlotDisplay';
 import VotePanel from './components/VotePanel';
 import StatsPanel from './components/StatsPanel';
+import DramaGame from './components/DramaGame';
 import { useStreamStore } from './store';
 import { useWebSocket } from './hooks/useWebSocket';
 import { roomAPI } from './services/api';
+import { wsService } from './services/websocket';
 import './App.css';
 
 function App() {
   const [started, setStarted] = useState(false);
+  const [useDramaGame, setUseDramaGame] = useState(true); // 使用剧本游戏
   const {
     roomId,
     currentNode,
@@ -21,6 +24,11 @@ function App() {
 
   // 连接 WebSocket
   useWebSocket(roomId, started);
+
+  // 获取WebSocket实例
+  const getWebSocket = () => {
+    return wsService.getWebSocket();
+  };
 
   const handleStart = () => {
     setStarted(true);
@@ -57,16 +65,32 @@ function App() {
 
   return (
     <div className="app-container fullscreen">
-      <StreamPublisher />
-      <div className="overlay-panels">
-        <StatsPanel />
-        <VotePanel />
-        <PlotDisplay
-          image={currentNode?.image || ''}
-          text={currentNode?.text || ''}
-          onNext={handleNext}
-        />
-      </div>
+      {useDramaGame ? (
+        // 使用剧本游戏模式 - 游戏铺满全屏
+        <>
+          <DramaGame
+            roomId={roomId}
+            storyPath="../drama/story.json"
+            ws={getWebSocket()}
+          />
+          {/* 摄像头小窗浮在游戏上方 */}
+          <StreamPublisher />
+        </>
+      ) : (
+        // 使用原有的PlotDisplay模式
+        <>
+          <StreamPublisher />
+          <div className="overlay-panels">
+            <StatsPanel />
+            <VotePanel />
+            <PlotDisplay
+              image={currentNode?.image || ''}
+              text={currentNode?.text || ''}
+              onNext={handleNext}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

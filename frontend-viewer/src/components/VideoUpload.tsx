@@ -29,6 +29,21 @@ const VideoUpload = ({ roomId }: VideoUploadProps) => {
     try {
       const response = await axios.post('/api/video/upload', formData)
       setMessage(`上传成功！视频 ID: ${response.data.video_id}`)
+
+      // 发送到后端收集用户互动
+      try {
+        await axios.post('/api/drama/interaction/add', {
+          room_id: roomId,
+          interaction: {
+            user_id: `user_${Date.now()}`,
+            type: 'video',
+            content: response.data.video_id,
+            timestamp: Date.now()
+          }
+        })
+      } catch (error) {
+        console.error('发送互动数据失败:', error)
+      }
     } catch (error) {
       setMessage('上传失败，请重试')
     } finally {

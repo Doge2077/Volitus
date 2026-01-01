@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from .api import video, plot, room
+from .api import video, plot, room, drama
 from .ws import websocket
 
 app = FastAPI(
@@ -31,6 +31,7 @@ app.mount("/videos", StaticFiles(directory="data/videos"), name="videos")
 app.include_router(video.router, prefix="/api/video", tags=["视频"])
 app.include_router(plot.router, prefix="/api/plot", tags=["剧情"])
 app.include_router(room.router, prefix="/api/room", tags=["房间"])
+app.include_router(drama.router, prefix="/api/drama", tags=["剧本游戏"])
 app.include_router(websocket.router, prefix="/ws", tags=["WebSocket"])
 
 

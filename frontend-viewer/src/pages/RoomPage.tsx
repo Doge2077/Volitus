@@ -4,7 +4,10 @@ import LivePlayer from '../components/LivePlayer'
 import VoteModal from '../components/VoteModal'
 import VideoUpload from '../components/VideoUpload'
 import ChatWindow from '../components/ChatWindow'
+import DramaGameViewer from '../components/DramaGame'
+import ChapterVote from '../components/ChapterVote'
 import { roomAPI } from '../services/api'
+import { wsService } from '../services/websocket'
 import './RoomPage.css'
 
 function RoomPage() {
@@ -81,12 +84,17 @@ function RoomPage() {
       <div className="viewer-container">
         <div className="main-content">
           <LivePlayer roomId={roomId!} />
+          {/* 剧本游戏显示 */}
+          <DramaGameViewer roomId={roomId!} ws={wsService.getWebSocket()} />
         </div>
         <div className="side-panel">
           <VideoUpload roomId={roomId!} />
           <ChatWindow roomId={roomId!} />
         </div>
       </div>
+
+      {/* 章节投票 */}
+      <ChapterVote roomId={roomId!} ws={wsService.getWebSocket()} />
 
       {showVote && (
         <VoteModal

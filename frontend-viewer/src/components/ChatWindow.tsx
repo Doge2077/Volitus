@@ -50,7 +50,7 @@ function ChatWindow({ roomId }: ChatWindowProps) {
   }, [roomId])
 
   // 发送文字消息
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputText.trim()) return
 
     const newMessage: Message = {
@@ -63,6 +63,26 @@ function ChatWindow({ roomId }: ChatWindowProps) {
 
     // 通过WebSocket发送消息到服务器，服务器会广播给所有人（包括自己）
     wsService.sendChatMessage(newMessage)
+
+    // 发送到后端收集用户互动
+    try {
+      await fetch('http://localhost:8000/api/drama/interaction/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          room_id: roomId,
+          interaction: {
+            user_id: `user_${Date.now()}`,
+            type: 'text',
+            content: inputText,
+            timestamp: Date.now()
+          }
+        })
+      })
+    } catch (error) {
+      console.error('发送互动数据失败:', error)
+    }
+
     setInputText('')
   }
 
