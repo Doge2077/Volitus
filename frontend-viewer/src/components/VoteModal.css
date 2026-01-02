@@ -4,31 +4,57 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .vote-modal {
-  background: white;
+  background: var(--surface);
+  border: 1px solid var(--border);
   padding: 2rem;
   border-radius: 12px;
-  min-width: 400px;
+  min-width: 420px;
   max-width: 500px;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .vote-modal h2 {
-  margin-top: 0;
-  color: #333;
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .vote-timer {
-  color: #ff6b6b;
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
+  color: var(--error);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .vote-options {
@@ -39,52 +65,68 @@
 }
 
 .vote-option {
-  padding: 1rem;
-  border: 2px solid #ddd;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--border);
   border-radius: 8px;
-  background: white;
+  background: var(--surface-light);
+  color: var(--text-primary);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
   transition: all 0.2s;
 }
 
 .vote-option:hover {
-  border-color: #667eea;
-  background: #f8f9ff;
+  border-color: var(--primary);
+  background: var(--surface);
+  transform: translateX(4px);
 }
 
 .vote-option.selected {
-  border-color: #667eea;
-  background: #667eea;
+  border-color: var(--primary);
+  background: var(--primary);
   color: white;
 }
 
 .vote-actions {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .vote-actions button {
   flex: 1;
   padding: 0.75rem;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
+  transition: all 0.2s;
 }
 
 .vote-actions button:first-child {
-  background: #667eea;
+  background: var(--primary);
   color: white;
 }
 
+.vote-actions button:first-child:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
 .vote-actions button:first-child:disabled {
-  background: #ccc;
+  background: var(--border);
+  color: var(--text-secondary);
   cursor: not-allowed;
 }
 
 .vote-actions button.cancel {
-  background: #f0f0f0;
-  color: #666;
+  background: var(--surface-light);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.vote-actions button.cancel:hover {
+  background: var(--surface);
+  border-color: var(--text-secondary);
 }

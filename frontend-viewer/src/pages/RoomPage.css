@@ -1,6 +1,6 @@
 .room-page {
   min-height: 100vh;
-  background: #1a1a2e;
+  background: var(--background);
 }
 
 .room-loading,
@@ -10,17 +10,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: var(--background);
+  color: var(--text-primary);
 }
 
 .loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
@@ -30,58 +30,62 @@
 }
 
 .room-loading p {
-  margin-top: 1rem;
-  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
 }
 
 .room-error h2 {
   margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
 .room-error p {
   margin-bottom: 2rem;
-  opacity: 0.9;
+  color: var(--text-secondary);
 }
 
 .room-error button {
   padding: 0.75rem 2rem;
-  background: white;
-  color: #667eea;
+  background: var(--primary);
+  color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: all 0.2s;
 }
 
 .room-error button:hover {
-  transform: scale(1.05);
+  background: var(--primary-hover);
+  transform: translateY(-1px);
 }
 
 .room-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
-  background: #16213e;
-  border-bottom: 1px solid #2d3748;
-  color: white;
+  padding: 1rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
 .back-button {
   padding: 0.5rem 1rem;
   background: transparent;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   transition: all 0.2s;
 }
 
 .back-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: var(--surface-light);
+  border-color: var(--primary);
 }
 
 .room-title {
@@ -90,13 +94,14 @@
 }
 
 .room-title h2 {
-  margin: 0 0 0.3rem 0;
-  font-size: 1.3rem;
+  margin: 0 0 0.4rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .room-id-badge {
   font-size: 0.85rem;
-  opacity: 0.7;
+  color: var(--text-secondary);
 }
 
 .room-stats {
@@ -105,28 +110,31 @@
 }
 
 .viewer-count {
-  padding: 0.4rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .viewer-container {
   display: flex;
-  height: calc(100vh - 100px);  /* 留出更多空间给header */
+  height: calc(100vh - 65px);
   padding: 1rem;
   gap: 1rem;
 }
 
 .main-content {
   flex: 1;
-  background: #16213e;
+  background: var(--surface);
   border-radius: 8px;
+  border: 1px solid var(--border);
   overflow: hidden;
 }
 
 .side-panel {
-  width: 380px;  /* 增加宽度以更好地显示聊天 */
+  width: 380px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -134,12 +142,10 @@
   overflow: hidden;
 }
 
-/* ChatWindow占据剩余空间 */
 .side-panel > :last-child {
   flex: 1;
   min-height: 0;
 }
-
 
 @media (max-width: 1024px) {
   .viewer-container {

@@ -2,37 +2,38 @@
   position: absolute;
   bottom: 8rem;
   left: 1.5rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--surface);
   backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  max-width: 280px;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  max-width: 300px;
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .vote-panel h3 {
-  margin: 0 0 0.75rem 0;
-  color: white;
-  font-size: 0.9rem;
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
   font-weight: 600;
 }
 
 .no-vote {
   text-align: center;
   padding: 1rem 0;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary);
 }
 
 .no-vote p {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
 }
 
 .vote-progress {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.875rem;
 }
 
 .vote-header {
@@ -45,68 +46,69 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  background: rgba(255, 107, 157, 0.2);
-  border-radius: 12px;
-  color: #ff6b9d;
-  font-size: 0.75rem;
-  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  background: rgba(145, 71, 255, 0.15);
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .time-left {
   font-size: 1rem;
   font-weight: 600;
-  color: white;
-  font-family: monospace;
+  color: var(--text-primary);
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
 }
 
 .vote-options {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .vote-option {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.35rem;
 }
 
 .option-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
 }
 
 .option-label {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   font-weight: 500;
 }
 
 .option-count {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
+  font-weight: 600;
 }
 
 .progress-bar {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+  height: 8px;
+  background: var(--surface-light);
+  border-radius: 4px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #ff6b9d 0%, #c06bff 100%);
+  background: var(--primary);
   transition: width 0.3s ease;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .vote-total {
-  padding-top: 0.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
   text-align: center;
 }
-

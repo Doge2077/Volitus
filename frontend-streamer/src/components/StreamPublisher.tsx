@@ -15,7 +15,9 @@ const StreamPublisher = () => {
   const videoRef = useRef<HTMLDivElement>(null);
   const pipVideoRef = useRef<HTMLDivElement>(null);
   const [isStreaming, setIsStreaming] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [isMicMuted, setIsMicMuted] = useState(false);
+  const [isCameraOff, setIsCameraOff] = useState(false);
   const [streamMode, setStreamMode] = useState<'camera' | 'screen'>('camera');
   const [showCameraInScreen, setShowCameraInScreen] = useState(false);
   const [error, setError] = useState('');
@@ -100,6 +102,25 @@ const StreamPublisher = () => {
     setIsMicMuted(!isMicMuted);
   };
 
+  const toggleCamera = () => {
+    const track = agoraService.getLocalVideoTrack();
+    if (track) {
+      track.setEnabled(isCameraOff);
+    }
+    setIsCameraOff(!isCameraOff);
+  };
+
+  const togglePause = async () => {
+    if (isPaused) {
+      await agoraService.publish();
+      setIsPublishing(true);
+    } else {
+      await agoraService.unpublish();
+      setIsPublishing(false);
+    }
+    setIsPaused(!isPaused);
+  };
+
   useEffect(() => {
     return () => {
       agoraService.leave();
@@ -133,35 +154,42 @@ const StreamPublisher = () => {
       )}
       <div className="floating-controls">
         {!isStreaming ? (
-          <button className="control-btn start-stream" onClick={startCamera} title="启动摄像头">
-            开始直播
+          <button className="control-btn primary" onClick={startCamera} title="开始直播">
+            <span className="btn-icon">▶</span>
+            <span className="btn-text">开始直播</span>
           </button>
         ) : (
           <>
-            <button className="control-btn muted" onClick={stopStream} title="停止直播">
-              停止
+            <button className={`control-btn ${isPaused ? 'warning' : 'secondary'}`} onClick={togglePause} title={isPaused ? '继续直播' : '暂停直播'}>
+              <span className="btn-icon">{isPaused ? '▶' : '⏸'}</span>
             </button>
-            <button className="control-btn" onClick={toggleMicMute} title={isMicMuted ? '开麦' : '闭麦'}>
-              {isMicMuted ? '🔇' : '🎤'}
+            <button className={`control-btn ${isMicMuted ? 'danger' : 'secondary'}`} onClick={toggleMicMute} title={isMicMuted ? '开麦' : '闭麦'}>
+              <span className="btn-icon">{isMicMuted ? '🔇' : '🎤'}</span>
+            </button>
+            <button className={`control-btn ${isCameraOff ? 'danger' : 'secondary'}`} onClick={toggleCamera} title={isCameraOff ? '开启摄像头' : '关闭摄像头'}>
+              <span className="btn-icon">{isCameraOff ? '📷' : '📹'}</span>
             </button>
             {streamMode === 'camera' ? (
-              <button className="control-btn" onClick={switchToScreen} title="切换到屏幕共享">
-                🖥️
+              <button className="control-btn secondary" onClick={switchToScreen} title="切换到屏幕共享">
+                <span className="btn-icon">🖥️</span>
               </button>
             ) : (
               <>
-                <button className="control-btn" onClick={switchToCamera} title="切换到摄像头">
-                  📹
+                <button className="control-btn secondary" onClick={switchToCamera} title="切换到摄像头">
+                  <span className="btn-icon">📹</span>
                 </button>
                 <button
-                  className={`control-btn ${showCameraInScreen ? 'active' : ''}`}
+                  className={`control-btn ${showCameraInScreen ? 'active' : 'secondary'}`}
                   onClick={toggleCameraInScreen}
                   title={showCameraInScreen ? '隐藏头像' : '显示头像'}
                 >
-                  {showCameraInScreen ? '👤✓' : '👤'}
+                  <span className="btn-icon">👤</span>
                 </button>
               </>
             )}
+            <button className="control-btn danger" onClick={stopStream} title="停止直播">
+              <span className="btn-icon">⏹</span>
+            </button>
           </>
         )}
       </div>
