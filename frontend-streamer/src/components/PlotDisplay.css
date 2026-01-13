@@ -2,46 +2,47 @@
   position: absolute;
   bottom: 8rem;
   right: 1.5rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--surface);
   backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  max-width: 320px;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  max-width: 340px;
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .plot-text {
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 0.75rem;
-  padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  border-left: 2px solid #ff6b9d;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  padding: 0.875rem 1rem;
+  background: var(--surface-light);
+  border-radius: 6px;
+  border-left: 3px solid var(--primary);
 }
 
 .next-button {
   width: 100%;
-  padding: 0.6rem 1rem;
-  font-size: 0.85rem;
-  background: linear-gradient(135deg, #ff6b9d 0%, #c06bff 100%);
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  background: var(--primary);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
-.next-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+.next-button:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(145, 71, 255, 0.4);
 }
 
 .next-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api/drama';
+const API_BASE_URL = '/api/drama';
 
 export interface DramaProgress {
   chapter_id: number;

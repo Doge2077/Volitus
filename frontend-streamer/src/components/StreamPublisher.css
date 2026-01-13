@@ -5,11 +5,11 @@
   width: 320px;
   height: 240px;
   background: #000;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   z-index: 100;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border);
 }
 
 .video-preview.fullscreen {
@@ -31,9 +31,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.8);
-  color: rgba(255, 255, 255, 0.6);
-  gap: 1rem;
+  background: rgba(0, 0, 0, 0.85);
+  color: var(--text-secondary);
   z-index: 2;
 }
 
@@ -44,83 +43,122 @@
 
 .floating-controls {
   position: absolute;
-  bottom: 0.5rem;
+  bottom: 0.75rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 0.5rem;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--surface);
   backdrop-filter: blur(10px);
-  padding: 0.5rem 0.75rem;
-  border-radius: 20px;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
 }
 
 .control-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 0.75rem;
+  border-radius: 6px;
   border: none;
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
-.control-btn svg {
-  width: 14px;
-  height: 14px;
+.control-btn .btn-icon {
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
-.control-btn.start-stream {
-  background: linear-gradient(135deg, #ff6b9d 0%, #c06bff 100%);
+.control-btn .btn-text {
+  white-space: nowrap;
 }
 
-.control-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.1);
+.control-btn.primary {
+  background: var(--primary);
+  color: white;
 }
 
-.control-btn.start-stream:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+.control-btn.primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(145, 71, 255, 0.4);
 }
 
-.control-btn.muted {
-  background: rgba(255, 71, 87, 0.3);
-  color: #ff4757;
+.control-btn.secondary {
+  background: var(--surface-light);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
 }
 
-.control-btn.muted:hover {
-  background: rgba(255, 71, 87, 0.5);
+.control-btn.secondary:hover {
+  background: var(--border);
+  border-color: var(--text-secondary);
+}
+
+.control-btn.danger {
+  background: rgba(241, 100, 108, 0.15);
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+.control-btn.danger:hover {
+  background: var(--error);
+  color: white;
+}
+
+.control-btn.warning {
+  background: rgba(255, 184, 0, 0.15);
+  color: var(--warning);
+  border: 1px solid var(--warning);
+}
+
+.control-btn.warning:hover {
+  background: var(--warning);
+  color: var(--background);
+}
+
+.control-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
 }
 
 .floating-info {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--surface);
   backdrop-filter: blur(10px);
-  padding: 0.25rem 0.5rem;
-  border-radius: 12px;
-  color: white;
-  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 0.8rem;
   z-index: 10;
 }
 
 .stream-type {
-  font-size: 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
 }
 
 .room-id {
-  font-family: monospace;
-  color: rgba(255, 255, 255, 0.8);
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
 }
 
 .error-message {
@@ -128,10 +166,12 @@
   top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 71, 87, 0.9);
+  background: var(--error);
   color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(241, 100, 108, 0.4);
 }

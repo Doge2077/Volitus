@@ -21,8 +21,9 @@ export interface StreamStats {
 
 class AgoraService {
   private client: IAgoraRTCClient | null = null;
-  private localVideoTrack: ICameraVideoTrack | null = null;
+  private localVideoTrack: ILocalVideoTrack | null = null;
   private localAudioTrack: IMicrophoneAudioTrack | null = null;
+  private screenTrack: ILocalVideoTrack | null = null;
   private isPublishing = false;
 
   async init(config: AgoraConfig) {
@@ -81,6 +82,64 @@ class AgoraService {
       console.error('Failed to create tracks:', error);
       throw error;
     }
+  }
+
+  async createScreenTrack() {
+    try {
+      this.screenTrack = await AgoraRTC.createScreenVideoTrack({
+        encoderConfig: {
+          width: 1920,
+          height: 1080,
+          frameRate: 15,
+          bitrateMin: 1000,
+          bitrateMax: 2000,
+        },
+      }, 'auto');
+      console.log('Screen track created');
+      return this.screenTrack;
+    } catch (error) {
+      console.error('Failed to create screen track:', error);
+      throw error;
+    }
+  }
+
+  async switchToScreen() {
+    if (!this.client || !this.isPublishing) return;
+    try {
+      if (this.localVideoTrack) {
+        await this.client.unpublish(this.localVideoTrack);
+      }
+      if (!this.screenTrack) {
+        await this.createScreenTrack();
+      }
+      await this.client.publish(this.screenTrack!);
+      console.log('Switched to screen share');
+    } catch (error) {
+      console.error('Failed to switch to screen:', error);
+      throw error;
+    }
+  }
+
+  async switchToCamera() {
+    if (!this.client || !this.isPublishing) return;
+    try {
+      if (this.screenTrack) {
+        await this.client.unpublish(this.screenTrack);
+        this.screenTrack.close();
+        this.screenTrack = null;
+      }
+      if (this.localVideoTrack) {
+        await this.client.publish(this.localVideoTrack);
+      }
+      console.log('Switched to camera');
+    } catch (error) {
+      console.error('Failed to switch to camera:', error);
+      throw error;
+    }
+  }
+
+  getLocalVideoTrack() {
+    return this.localVideoTrack;
   }
 
   async publish() {

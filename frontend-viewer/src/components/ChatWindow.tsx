@@ -66,7 +66,7 @@ function ChatWindow({ roomId }: ChatWindowProps) {
 
     // 发送到后端收集用户互动
     try {
-      await fetch('http://localhost:8000/api/drama/interaction/add', {
+      await fetch('/api/drama/interaction/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

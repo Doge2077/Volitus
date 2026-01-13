@@ -30,7 +30,7 @@ class WebSocketService {
       this.ws.close()
     }
 
-    const wsUrl = `ws://localhost:8000/ws?room_id=${roomId}&role=${role}`
+    const wsUrl = `ws://${window.location.hostname}:8031/ws?room_id=${roomId}&role=${role}`
 
     this.ws = new WebSocket(wsUrl)
 

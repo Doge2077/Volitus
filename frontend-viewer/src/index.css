@@ -1,10 +1,29 @@
+:root {
+  --primary: #ff6b6b;
+  --primary-hover: #ff5252;
+  --secondary: #4a1f1f;
+  --background: #2d1414;
+  --surface: #3d1f1f;
+  --surface-light: #4a2626;
+  --border: #5a3030;
+  --text-primary: #fff5f5;
+  --text-secondary: #d4a5a5;
+  --success: #6bcf7f;
+  --error: #ff4757;
+  --warning: #ffa502;
+  --accent-purple: #9b59b6;
+  --accent-blue: #5b8dee;
+  --gradient-red: linear-gradient(135deg, #8b3a3a 0%, #5a2424 100%);
+  --gradient-card: linear-gradient(135deg, #4a2626 0%, #3d1f1f 100%);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--background);
+  color: var(--text-primary);
 }
 
 * {

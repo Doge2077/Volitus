@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { roomAPI, RoomListItem } from '../services/api'
+import Sidebar from '../components/Sidebar'
+import UserList from '../components/UserList'
 import './DiscoveryPage.css'
 
 function DiscoveryPage() {
@@ -11,7 +13,6 @@ function DiscoveryPage() {
 
   useEffect(() => {
     fetchRooms()
-    // 每10秒刷新一次房间列表
     const interval = setInterval(fetchRooms, 10000)
     return () => clearInterval(interval)
   }, [])
@@ -45,55 +46,86 @@ function DiscoveryPage() {
     return date.toLocaleDateString('zh-CN')
   }
 
+  const featuredRoom = rooms[0]
+
   return (
     <div className="discovery-page">
-      <header className="discovery-header">
-        <h1>Volitus 直播发现</h1>
-        <p>观众共创的互动剧情直播平台</p>
-      </header>
+      <Sidebar />
+      <main className="main-content">
+        <header className="page-header">
+          <h1>发现直播</h1>
+          <div className="search-bar">
+            <input type="text" placeholder="搜索..." />
+          </div>
+        </header>
 
-      {loading && rooms.length === 0 ? (
-        <div className="loading">加载中...</div>
-      ) : error ? (
-        <div className="error">
-          <p>{error}</p>
-          <button onClick={fetchRooms}>重试</button>
-        </div>
-      ) : rooms.length === 0 ? (
-        <div className="empty-state">
-          <p>暂无直播</p>
-          <p className="hint">等待主播开播...</p>
-        </div>
-      ) : (
-        <div className="rooms-grid">
-          {rooms.map((room) => (
-            <div
-              key={room.room_id}
-              className="room-card"
-              onClick={() => handleRoomClick(room.room_id)}
-            >
-              <div className="room-thumbnail">
-                <div className="live-badge">直播中</div>
-                <div className="viewer-count">
-                  <span className="icon">👥</span>
-                  <span>{room.viewer_count}</span>
+        {featuredRoom && (
+          <section className="featured-section">
+            <div className="featured-card" onClick={() => handleRoomClick(featuredRoom.room_id)}>
+              <div className="featured-badge">🔥 热门</div>
+              <div className="featured-content">
+                <h2>{featuredRoom.streamer_name}</h2>
+                <p>房间号: {featuredRoom.room_id}</p>
+                <button className="join-btn">加入直播</button>
+              </div>
+              <div className="featured-stats">
+                <div className="stat-item">
+                  <span className="stat-icon">👥</span>
+                  <span>{featuredRoom.viewer_count}</span>
                 </div>
               </div>
-              <div className="room-info">
-                <h3 className="streamer-name">{room.streamer_name}</h3>
-                <p className="room-id">房间号: {room.room_id}</p>
-                <p className="created-time">{formatDate(room.created_at)}</p>
-              </div>
             </div>
-          ))}
-        </div>
-      )}
+          </section>
+        )}
 
-      {!loading && rooms.length > 0 && (
-        <div className="refresh-hint">
-          列表每10秒自动刷新
-        </div>
-      )}
+        <section className="rooms-section">
+          <div className="section-header">
+            <h2>新游戏</h2>
+            <button className="see-all">查看全部 →</button>
+          </div>
+
+          {loading && rooms.length === 0 ? (
+            <div className="loading">加载中...</div>
+          ) : error ? (
+            <div className="error">
+              <p>{error}</p>
+              <button onClick={fetchRooms}>重试</button>
+            </div>
+          ) : rooms.length === 0 ? (
+            <div className="empty-state">
+              <p>暂无直播</p>
+            </div>
+          ) : (
+            <div className="rooms-grid">
+              {rooms.slice(1).map((room) => (
+                <div key={room.room_id} className="room-card" onClick={() => handleRoomClick(room.room_id)}>
+                  <div className="room-thumbnail">
+                    <div className="live-badge">直播中</div>
+                  </div>
+                  <div className="room-info">
+                    <h3>{room.streamer_name}</h3>
+                    <p className="room-meta">{formatDate(room.created_at)}</p>
+                    <div className="room-stats">
+                      <span>👥 {room.viewer_count}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+
+        <section className="stats-section">
+          <h2>统计数据</h2>
+          <div className="stats-card">
+            <div className="stat-circle">
+              <span className="stat-value">{rooms.reduce((sum, r) => sum + r.viewer_count, 0)}</span>
+              <span className="stat-label">总观众</span>
+            </div>
+          </div>
+        </section>
+      </main>
+      <UserList />
     </div>
   )
 }
